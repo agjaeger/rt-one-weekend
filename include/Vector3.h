@@ -22,13 +22,6 @@ namespace rtow {
 
                 float& operator[](int i);
                 
-                Vector3& operator+=(Vector3 &v2);
-                Vector3& operator-=(Vector3 &v2);
-                Vector3& operator*=(Vector3 &v2);
-                Vector3& operator/=(Vector3 &v2);
-                Vector3& operator*=(float t);
-                Vector3& operator/=(float t);
-                
             private:
                 std::array<float, 3> data;
         };
