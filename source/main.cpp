@@ -16,17 +16,32 @@ using namespace rtow::math;
 using namespace rtow::scene;
 
 Vector3
+randomInUnitSphere () {
+    Vector3 p;
+    
+    do {
+        Vector3 v_rand = Vector3(
+            rand()/float(RAND_MAX),
+            rand()/float(RAND_MAX),
+            rand()/float(RAND_MAX)
+        );
+        
+        p = 2.0f * v_rand - Vector3(1,1,1);        
+    } while (squaredLength(p) >= 1.0f);
+    
+    return p;
+}
+
+Vector3
 intersectColor (
     Ray p_r,
     Intersectable* p_world
 ) {
     Intersection intersectionRecord;
-    if (p_world->intersect(p_r, 0.0f, 100.0f, intersectionRecord)) {
-        return 0.5f * Vector3(
-            intersectionRecord.normal.x() + 1,
-            intersectionRecord.normal.y() + 1,
-            intersectionRecord.normal.z() + 1
-        );
+    if (p_world->intersect(p_r, 0.01f, 100.0f, intersectionRecord)) {
+        Vector3 target = intersectionRecord.normal + randomInUnitSphere();
+        
+        return 0.5f * intersectColor(Ray(intersectionRecord.point, target), p_world);
     } else {
         Vector3 uv_direction = unitVector(p_r.direction());
         float t = 0.5f * (uv_direction.y() + 1);
@@ -38,8 +53,8 @@ intersectColor (
 
 int main() {
     Intersectable *world = new IntersectableList({
-        new Sphere(Vector3(0, -1, -1), 0.5f),
-        new Sphere(Vector3(0, -2, -4), 2.4f)
+        new Sphere(Vector3(0, 0, -1), 0.5f),
+        new Sphere(Vector3(0, -100.5, -1), 100.0f)
     });
 
     uint numSamples = 100;
