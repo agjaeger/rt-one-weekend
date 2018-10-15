@@ -56,39 +56,6 @@ Vector3::operator[] (
     return data[p_index];
 }
 
-Vector3
-Vector3::operator+ (
-    Vector3& p_vec
-) {
-    return Vector3 (
-        data[0] + p_vec.x(),
-        data[1] + p_vec.y(),
-        data[2] + p_vec.z()
-    );
-}
-
-Vector3
-Vector3::operator- (
-    Vector3& p_vec
-) {
-    return Vector3 (
-        data[0] - p_vec.x(),
-        data[1] - p_vec.y(),
-        data[2] - p_vec.z()
-    );
-}
-
-Vector3
-Vector3::operator/ (
-    float p_value
-) {
-    return Vector3 (
-        data[0] / p_value,
-        data[1] / p_value,
-        data[2] / p_value
-    );
-}
-
 Vector3&
 Vector3::operator+= (
     Vector3& p_vec
@@ -156,6 +123,74 @@ Vector3::operator/= (
 }
 
 // Namespace function implementations
+
+std::ostream&
+rtow::math::operator<< (
+    std::ostream& p_os,
+    Vector3 p_vec
+) {
+    return p_os << " X:" << p_vec.x() << " Y:" << p_vec.y() << " Z:" << p_vec.z();
+}
+
+Vector3
+rtow::math::operator+ (
+    Vector3 p_lhs,
+    Vector3 p_rhs
+) {
+    return Vector3 (
+        p_lhs.x() + p_rhs.x(),
+        p_lhs.y() + p_rhs.y(),
+        p_lhs.z() + p_rhs.z()
+    );
+}
+
+Vector3
+rtow::math::operator- (
+    Vector3 p_lhs,
+    Vector3 p_rhs
+) {
+    return Vector3 (
+        p_lhs.x() - p_rhs.x(),
+        p_lhs.y() - p_rhs.y(),
+        p_lhs.z() - p_rhs.z()
+    );
+}
+
+Vector3
+rtow::math::operator/ (
+    Vector3 p_lhs,
+    float p_rhs
+) {
+    return Vector3 (
+        p_lhs.x() / p_rhs,
+        p_lhs.y() / p_rhs,
+        p_lhs.z() / p_rhs
+    );
+}
+
+Vector3
+rtow::math::operator* (
+    float p_lhs,
+    Vector3 p_rhs
+) {
+    return Vector3 (
+        p_rhs.x() * p_lhs,
+        p_rhs.y() * p_lhs,
+        p_rhs.z() * p_lhs
+    );
+}
+
+Vector3
+rtow::math::operator* (
+    Vector3 p_lhs,
+    float p_rhs
+) {
+    return Vector3 (
+        p_lhs.x() * p_rhs,
+        p_lhs.y() * p_rhs,
+        p_lhs.z() * p_rhs
+    );
+}
 
 float
 rtow::math::length (

@@ -22,10 +22,6 @@ namespace rtow {
 
                 float& operator[](int i);
                 
-                Vector3 operator+(Vector3& v1);
-                Vector3 operator-(Vector3& v1);
-                Vector3 operator/(float v);
-                
                 Vector3& operator+=(Vector3 &v2);
                 Vector3& operator-=(Vector3 &v2);
                 Vector3& operator*=(Vector3 &v2);
@@ -36,6 +32,14 @@ namespace rtow {
             private:
                 std::array<float, 3> data;
         };
+
+        std::ostream& operator<<(std::ostream &os, Vector3 v);
+        
+        Vector3 operator+(Vector3 lhs, Vector3 rhs);
+        Vector3 operator-(Vector3 lhs, Vector3 rhs);
+        Vector3 operator/(Vector3 lhs, float rhs);
+        Vector3 operator*(Vector3 lhs, float rhs);
+        Vector3 operator*(float lhs, Vector3 rhs);
 
         float length(Vector3 v);
         float squaredLength(Vector3 v);
