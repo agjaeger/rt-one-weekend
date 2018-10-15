@@ -14,14 +14,14 @@ IntersectableList::intersect (
     float p_tmax,
     Intersection &p_record
 ) {
-    Intersection tempRecord;
     bool intersectedAny = false;
     float closest = p_tmax;
-    
+
+    Intersection tempRecord;
     for (Intersectable* obj : m_objs) {
         if (obj->intersect(p_ray, p_tmin, p_tmax, tempRecord)) {
             intersectedAny = true;
-            
+
             if (tempRecord.distance < closest) {
                 closest = tempRecord.distance;
                 p_record = tempRecord;

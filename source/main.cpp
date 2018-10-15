@@ -19,23 +19,25 @@ intersectColor (
     Intersectable* p_world
 ) {
     Intersection intersectionRecord;
-    if (p_world->intersect(p_r, 0.0f, 1000.0f, intersectionRecord)) {
+    if (p_world->intersect(p_r, 0.0f, 100.0f, intersectionRecord)) {
         return 0.5f * Vector3(
-            intersectionRecord.point.x() + 1,
-            intersectionRecord.point.y() + 1,
-            intersectionRecord.point.z() + 1
+            intersectionRecord.normal.x() + 1,
+            intersectionRecord.normal.y() + 1,
+            intersectionRecord.normal.z() + 1
         );
     } else {
-        Vector3 uv_direction = unitVector(p_r.direction());
-        float t = 0.5f * (uv_direction.y() + 1);
-        return (1.0f-t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
+        //Vector3 uv_direction = unitVector(p_r.direction());
+        //float t = 0.5f * (uv_direction.y() + 1);
+        //return (1.0f-t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
+        
+        return Vector3(0,0,0);
     }
 }
 
 int main() {
     Intersectable *world = new IntersectableList({
         //new Sphere(Vector3(0, 0, -1), 0.5f),
-        new Sphere(Vector3(0, -100.5f, -1), 100)
+        new Sphere(Vector3(0, 0, -1), 1.0f)
     });
     
     Image output (200, 100);
