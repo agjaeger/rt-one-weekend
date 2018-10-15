@@ -45,7 +45,7 @@ namespace rtow {
         float squaredLength(Vector3 v);
 
         Vector3 unitVector(Vector3 v);
-        float dot(Vector3 &v1, Vector3 &v2);
-        Vector3 cross(Vector3 &v1, Vector3 &v2);
+        float dot(Vector3 v1, Vector3 v2);
+        Vector3 cross(Vector3 v1, Vector3 v2);
     };
 };

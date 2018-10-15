@@ -218,8 +218,8 @@ rtow::math::unitVector (
 
 float
 rtow::math::dot (
-    Vector3 &p_vec1,
-    Vector3 &p_vec2
+    Vector3 p_vec1,
+    Vector3 p_vec2
 ) {
     return
           p_vec1.x() * p_vec2.x()
@@ -229,8 +229,8 @@ rtow::math::dot (
 
 Vector3
 rtow::math::cross (
-    Vector3 &p_vec1,
-    Vector3 &p_vec2
+    Vector3 p_vec1,
+    Vector3 p_vec2
 ) {
     return Vector3 (
         p_vec1.y() * p_vec2.z() - p_vec1.z() * p_vec2.y(),
