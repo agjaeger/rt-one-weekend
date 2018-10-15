@@ -4,52 +4,36 @@
 #include "Vector3.h"
 #include "Ray.h"
 #include "Image.h"
+#include "Sphere.h"
 
 using namespace rtow::render;
 using namespace rtow::math;
+using namespace rtow::scene;
 
-float
-intersectSphere (
-    Vector3 p_sphereOrigin, 
-    float p_radius, 
-    Ray p_r
-) {
-    // Move ray to sphere origin
-    Vector3 ws_newRayOrigin = p_r.origin() - p_sphereOrigin;
-    
-    // Calculate discriminant
-    float a = dot(p_r.direction(), p_r.direction());
-    float b = 2 * dot(ws_newRayOrigin, p_r.direction());
-    float c = dot(ws_newRayOrigin, ws_newRayOrigin) - pow(p_radius, 2);
-    float discriminant = pow(b,2) - 4*a*c;
-    
-    // if discriminant is 0; we missed
-    if (discriminant < 0) {
-        return -1;
-    } else {
-        return (-b - sqrt(discriminant)) / (2*a);
-    }
-}
+Sphere s (Vector3(0, 0, -1), 0.5);
 
 Vector3
 intersectColor (
     Ray p_r
 ) {
-    float t = intersectSphere(Vector3(0, 0, -1), 0.5, p_r);
+    Intersection sphereIntersection;
+    bool didIntersect = s.intersect(p_r, 0.01, 10, sphereIntersection);
     
     // if the sphere was hit
-    if (t > 0) {
-        Vector3 uv_normal = unitVector(p_r.at(t) - Vector3(0,0,-1));
+    if (didIntersect) {
+        Vector3 uv_normal = unitVector(sphereIntersection.normal);
+
         return 0.5 * Vector3(
             uv_normal.x() + 1,
             uv_normal.y() + 1, 
             uv_normal.z() + 1
         );            
+    } else {
+        Vector3 uv_direction = unitVector(p_r.direction());
+        float t = 0.5f * (uv_direction.y() + 1);
+        
+        return (1-t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
     }
-    
-    Vector3 uv_direction = unitVector(p_r.direction());
-    t = 0.5f * (uv_direction.y() + 1);
-    return (1-t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
 }
 
 int main() {
