@@ -8,7 +8,7 @@
 using namespace rtow::render;
 using namespace rtow::math;
 
-bool
+float
 intersectSphere (
     Vector3 p_sphereOrigin, 
     float p_radius, 
@@ -24,20 +24,32 @@ intersectSphere (
     float discriminant = pow(b,2) - 4*a*c;
     
     // if discriminant is 0; we missed
-    // else we hit
-    return (discriminant > 0);
+    if (discriminant < 0) {
+        return -1;
+    } else {
+        return (-b - sqrt(discriminant)) / (2*a);
+    }
 }
 
 Vector3
 intersectColor (
     Ray p_r
 ) {
-    if (intersectSphere(Vector3(0, 0, -1), 0.5, p_r)) {
-        return Vector3(1, 0, 0);
+    float t = intersectSphere(Vector3(0, 0, -1), 0.5, p_r);
+    
+    // if the sphere was hit
+    if (t > 0) {
+        Vector3 uv_normal = unitVector(p_r.at(t) - Vector3(0,0,-1));
+        return 0.5 * Vector3(
+            uv_normal.x() + 1,
+            uv_normal.y() + 1, 
+            uv_normal.z() + 1
+        );            
     }
     
-    float t = 0.5f * (unitVector(p_r.direction()).y() + 1);
-    return (1 - t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
+    Vector3 uv_direction = unitVector(p_r.direction());
+    t = 0.5f * (uv_direction.y() + 1);
+    return (1-t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
 }
 
 int main() {
