@@ -24,9 +24,9 @@ rtow::render::Image::setPixel (
 
     unsigned int arrayPosition = (m_width * m_numChannels) * (m_height - 1 - p_y) + m_numChannels * p_x;
 
-    m_pixels[arrayPosition + 0] = (unsigned char)(p_c.r() * 255);
-    m_pixels[arrayPosition + 1] = (unsigned char)(p_c.g() * 255);
-    m_pixels[arrayPosition + 2] = (unsigned char)(p_c.b() * 255);
+    m_pixels[arrayPosition + 0] = (unsigned char)(p_c.r() * 255.99);
+    m_pixels[arrayPosition + 1] = (unsigned char)(p_c.g() * 255.99);
+    m_pixels[arrayPosition + 2] = (unsigned char)(p_c.b() * 255.99);
 }
 
 void

@@ -11,11 +11,11 @@ namespace rtow {
                 Sphere(Vector3 origin, float radius);
 
                 Vector3 normal(Vector3 point);
-                bool intersect(Ray r, float tMin, float tMax, Intersection &intersection);                
+                virtual bool intersect(Ray r, float t_min, float t_max, Intersection &intersection);     
+
             private:
                 Vector3 m_origin;
                 float m_radius;
         };
-    }
-
+    };
 };

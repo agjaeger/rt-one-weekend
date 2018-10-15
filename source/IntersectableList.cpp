@@ -1,0 +1,33 @@
+
+#include "IntersectableList.h"
+
+using namespace rtow::scene;
+
+IntersectableList::IntersectableList (
+    std::initializer_list<Intersectable*> p_objs
+) : m_objs (p_objs) {}
+
+bool
+IntersectableList::intersect (
+    Ray p_ray,
+    float p_tmin,
+    float p_tmax,
+    Intersection &p_record
+) {
+    Intersection tempRecord;
+    bool intersectedAny = false;
+    float closest = p_tmax;
+    
+    for (Intersectable* obj : m_objs) {
+        if (obj->intersect(p_ray, p_tmin, p_tmax, tempRecord)) {
+            intersectedAny = true;
+            
+            if (tempRecord.distance < closest) {
+                closest = tempRecord.distance;
+                p_record = tempRecord;
+            }
+        }
+    }
+    
+    return intersectedAny;
+}

@@ -46,7 +46,7 @@ Sphere::intersect (
             
             return true;
         }
-    }    
+    }
 }
 
 Vector3
