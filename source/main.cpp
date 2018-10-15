@@ -26,18 +26,18 @@ intersectColor (
             intersectionRecord.normal.z() + 1
         );
     } else {
-        //Vector3 uv_direction = unitVector(p_r.direction());
-        //float t = 0.5f * (uv_direction.y() + 1);
-        //return (1.0f-t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
+        Vector3 uv_direction = unitVector(p_r.direction());
+        float t = 0.5f * (uv_direction.y() + 1);
         
         return Vector3(0,0,0);
+        return (1.0f-t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
     }
 }
 
 int main() {
     Intersectable *world = new IntersectableList({
-        //new Sphere(Vector3(0, 0, -1), 0.5f),
-        new Sphere(Vector3(0, 0, -1), 1.0f)
+        new Sphere(Vector3(0, -1, -1), 0.5f),
+        //new Sphere(Vector3(0, -2, -2), 2.4f)
     });
     
     Image output (200, 100);
