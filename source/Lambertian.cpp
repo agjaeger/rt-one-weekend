@@ -3,12 +3,14 @@
 
 using namespace rtow::render;
 
-#include <iostream>
-
 Lambertian::Lambertian (
-    Vector3 p_albedo
+    Texture *p_albedo
 ) {
     m_albedo = p_albedo;
+}
+
+Lambertian::~Lambertian () {
+    free(m_albedo);
 }
 
 bool
@@ -18,9 +20,7 @@ Lambertian::scatter (
     Vector3 &p_attenuation, 
     Ray &p_scatterOut
 ) {
-//    std::cout << "in scatter" << std::endl;
-
-    p_attenuation = m_albedo;
+    p_attenuation = m_albedo->value(0, 0, p_record.point);
     p_scatterOut = Ray(
         p_record.point, 
         p_record.normal

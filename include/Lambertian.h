@@ -2,6 +2,7 @@
 #pragma once
 
 #include "Material.h"
+#include "Texture.h"
 #include "Random.h"
 #include "Vector3.h"
 
@@ -12,11 +13,13 @@ namespace rtow {
     namespace render {
         class Lambertian : public Material {
             public:
-                Lambertian (Vector3 albedo);
+                Lambertian (Texture *albedo);
+                ~Lambertian ();
+
                 virtual bool scatter (Ray in, Intersection record, Vector3 &attentuation, Ray &out);
 
             private:
-                Vector3 m_albedo;
+                Texture *m_albedo;
         };
     };
 };
