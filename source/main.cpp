@@ -43,7 +43,7 @@ getColor (
             scatterRay
         );
 
-        if (scatterRayHit && p_depth < 1) {
+        if (scatterRayHit && p_depth < 10) {
             return attenuation * getColor(scatterRay, p_world, p_depth+1);
         } else {
             return Vector3(0,0,0);

@@ -23,7 +23,7 @@ Lambertian::scatter (
     p_attenuation = m_albedo->value(0, 0, p_record.point);
     p_scatterOut = Ray(
         p_record.point, 
-        p_record.normal
+        p_record.normal + Random::unitSphere()
     );
 
     return true;
