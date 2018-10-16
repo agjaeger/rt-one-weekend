@@ -32,9 +32,7 @@ Sphere::intersect (
 
     float discriminant = pow(b, 2) - a*c;
     
-    if (discriminant <= 0) {
-        return false;
-    } else {
+    if (discriminant > 0) {
         float root = (-b - sqrt(pow(b,2) - a*c)) / a;
         if (root > p_tmin && root < p_tmax) {
             fillIntersection(root, p_ray, p_intersection);
@@ -47,13 +45,8 @@ Sphere::intersect (
             return true;
         }
     }
-}
-
-Vector3
-Sphere::normal (
-    Vector3 p_point
-) {
-    return (p_point - m_origin) / m_radius;
+    
+    return false;
 }
 
 void
@@ -64,6 +57,6 @@ Sphere::fillIntersection (
 ) {
     p_intersection.distance = p_dist;
     p_intersection.point = p_ray.at(p_dist);
-    p_intersection.normal = normal(p_ray.at(p_dist));
+    p_intersection.normal = (p_ray.at(p_dist) - m_origin) / m_radius;
     p_intersection.material = m_material;
 }

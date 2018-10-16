@@ -34,7 +34,8 @@ getColor (
     if (primaryRayHit) {
         Ray scatterRay;
         Vector3 attenuation;
-/*
+
+        // segfaults without if???
         bool scatterRayHit = intersectionRecord.material->scatter(
             p_r, 
             intersectionRecord,
@@ -46,7 +47,7 @@ getColor (
             return attenuation * getColor(scatterRay, p_world, p_depth+1);
         } else {
             return Vector3(0,0,0);
-        }*/ return Vector3(1,0,0);
+        }
     }
 
     else {
@@ -59,7 +60,7 @@ getColor (
 int main() {
     Intersectable *world = new IntersectableList({
         new Sphere(Vector3(0, 0, -1), 0.5f, new Lambertian(new ConstantTexture(Vector3(0.8, 0.3, 0.3)))),
-       // new Sphere(Vector3(0, -100.5, -50), 100.0f, new Lambertian(Vector3(0.8, 0.8, 0.0)))
+        new Sphere(Vector3(0, -100.5, -1), 100.0f, new Lambertian(new ConstantTexture(Vector3(0.1, 0.3, 0.3))))
     });
 
     uint numSamples = 100;
