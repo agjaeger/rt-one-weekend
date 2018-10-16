@@ -7,6 +7,8 @@
 
 #include "Vector3.h"
 
+using namespace rtow::math;
+
 namespace rtow {
     namespace render {
         class Image {
@@ -20,17 +22,17 @@ namespace rtow {
                 Image(Image&&) = delete;                    // Move constructor
                 Image& operator=(Image&&) = delete;         // Move assignment operator
 
-                void setPixel(uint x, uint y, rtow::math::Vector3 c);
+                void setPixel(uint x, uint y, Vector3 c);
                 void write(std::string filename);
-                
+
                 int height();
                 int width();
-                
+
             private:
                 int m_width;
                 int m_height;
                 const int m_numChannels = 3;
-                
+
                 std::unique_ptr<unsigned char[]> m_pixels;
         };
     };

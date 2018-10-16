@@ -5,10 +5,16 @@ using namespace rtow::scene;
 
 Sphere::Sphere (
     Vector3 p_origin, 
-    float p_radius
+    float p_radius,
+    Material *p_material
 ) {
     m_origin = p_origin;
     m_radius = p_radius;
+    m_material = p_material;
+}
+
+Sphere::~Sphere () {
+    free(m_material);
 }
 
 bool
@@ -31,19 +37,13 @@ Sphere::intersect (
     } else {
         float root = (-b - sqrt(pow(b,2) - a*c)) / a;
         if (root > p_tmin && root < p_tmax) {
-            p_intersection.distance = root;
-            p_intersection.point = p_ray.at(root);
-            p_intersection.normal = normal(p_ray.at(root));
-            
+            fillIntersection(root, p_ray, p_intersection);
             return true;
         }
         
         root = (-b + sqrt(pow(b,2) - a*c)) / a;
         if (root > p_tmin && root < p_tmax) {
-            p_intersection.distance = root;
-            p_intersection.point = p_ray.at(root);
-            p_intersection.normal = normal(p_ray.at(root));
-            
+            fillIntersection(root, p_ray, p_intersection);
             return true;
         }
     }
@@ -54,4 +54,16 @@ Sphere::normal (
     Vector3 p_point
 ) {
     return (p_point - m_origin) / m_radius;
+}
+
+void
+Sphere::fillIntersection (
+    float p_dist,
+    Ray p_ray,
+    Intersection &p_intersection
+) {
+    p_intersection.distance = p_dist;
+    p_intersection.point = p_ray.at(p_dist);
+    p_intersection.normal = normal(p_ray.at(p_dist));
+    p_intersection.material = m_material;
 }

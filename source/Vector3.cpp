@@ -104,6 +104,18 @@ rtow::math::operator/ (
 
 Vector3
 rtow::math::operator* (
+    Vector3 p_lhs,
+    Vector3 p_rhs
+) {
+    return Vector3 (
+        p_lhs.x() * p_rhs.x(),
+        p_lhs.y() * p_rhs.y(),
+        p_lhs.z() * p_rhs.z()
+    );
+}
+
+Vector3
+rtow::math::operator* (
     float p_lhs,
     Vector3 p_rhs
 ) {

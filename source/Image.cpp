@@ -4,7 +4,9 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
-rtow::render::Image::Image (
+using namespace rtow::render;
+
+Image::Image (
     int p_width, 
     int p_height
 ) {
@@ -14,10 +16,10 @@ rtow::render::Image::Image (
 }
 
 void
-rtow::render::Image::setPixel (
+Image::setPixel (
     uint p_x,
     uint p_y,
-    rtow::math::Vector3 p_c
+    Vector3 p_c
 ) {
     assert(p_x < m_width);
     assert(p_y < m_height);
@@ -30,7 +32,7 @@ rtow::render::Image::setPixel (
 }
 
 void
-rtow::render::Image::write (
+Image::write (
     std::string p_filename
 ) {
     stbi_write_png (
@@ -42,11 +44,11 @@ rtow::render::Image::write (
 }
 
 int
-rtow::render::Image::height () {
+Image::height () {
     return m_height;
 }
 
 int
-rtow::render::Image::width () {
+Image::width () {
     return m_width;
 }

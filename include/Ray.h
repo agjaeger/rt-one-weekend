@@ -9,6 +9,7 @@ namespace rtow {
     namespace math {
         class Ray {
             public:
+                Ray();
                 Ray(Vector3 origin, Vector3 dir);
 
                 Vector3 origin();

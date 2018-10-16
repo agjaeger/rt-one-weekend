@@ -31,6 +31,7 @@ namespace rtow {
         Vector3 operator+(Vector3 lhs, Vector3 rhs);
         Vector3 operator-(Vector3 lhs, Vector3 rhs);
         Vector3 operator/(Vector3 lhs, float rhs);
+        Vector3 operator*(Vector3 lhs, Vector3 rhs);
         Vector3 operator*(Vector3 lhs, float rhs);
         Vector3 operator*(float lhs, Vector3 rhs);
 
