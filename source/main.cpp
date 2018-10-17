@@ -60,16 +60,25 @@ getColor (
 
 int main() {
     Intersectable *world = new IntersectableList({
-        new Sphere(Vector3(0, 0, -1), 0.5f, new Metal(
-                new ConstantTexture(Vector3(0.8, 0.8, 0.8))
+        new Sphere(Vector3(0, 0, -1), 0.5f, new Lambertian(
+                new ConstantTexture(Vector3(0.8, 0.3, 0.3))
             )
         ),
         new Sphere(Vector3(0, -100.5, -1), 100.0f, new Lambertian(
             new CheckerTexture(
                 new ConstantTexture(Vector3(0.8, 0.8, 0.8)),
-                new ConstantTexture(Vector3(0.1, 0.3, 0.3))
+                new ConstantTexture(Vector3(0.8, 0.8, 0.0))
             )
-        ))
+        )),
+        new Sphere(Vector3(1, 0, -1), 0.5f, new Metal(
+                new ConstantTexture(Vector3(0.8, 0.6, 0.2))
+            )
+        ),
+        new Sphere(Vector3(-1, 0, -1), 0.5f, new Metal(
+                new ConstantTexture(Vector3(0.8, 0.8, 0.8))
+            )
+        ),
+        
     });
 
     uint numSamples = 100;
