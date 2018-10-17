@@ -40,7 +40,6 @@ getColor (
     if (primaryRayHit) {
         Ray scatterRay;
         Vector3 attenuation;
-
         bool scatterRayHit = intersectionRecord.material->scatter(
             p_r, 
             intersectionRecord,
@@ -55,11 +54,9 @@ getColor (
         }
     }
 
-    else {
-        Vector3 uv_direction = unitVector(p_r.direction());
-        float t = 0.5f * (uv_direction.y() + 1);
-        return (1.0f-t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
-    }
+    Vector3 uv_direction = unitVector(p_r.direction());
+    float t = 0.5f * (uv_direction.y() + 1);
+    return (1.0f-t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
 }
 
 int main() {
