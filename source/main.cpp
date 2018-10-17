@@ -13,6 +13,7 @@
 
 #include "Material.h"
 #include "Lambertian.h"
+#include "Metal.h"
 
 #include "Texture.h"
 #include "ConstantTexture.h"
@@ -29,7 +30,7 @@ getColor (
     int p_depth=0
 ) {
     Intersection intersectionRecord;
-    bool primaryRayHit = p_world->intersect(p_r, 0.01f, 100.0f, intersectionRecord);
+    bool primaryRayHit = p_world->intersect(p_r, 0.001f, 100.0f, intersectionRecord);
 
     if (primaryRayHit) {
         Ray scatterRay;
@@ -59,8 +60,16 @@ getColor (
 
 int main() {
     Intersectable *world = new IntersectableList({
-        new Sphere(Vector3(0, 0, -1), 0.5f, new Lambertian(new ConstantTexture(Vector3(0.8, 0.3, 0.3)))),
-        new Sphere(Vector3(0, -100.5, -1), 100.0f, new Lambertian(new ConstantTexture(Vector3(0.1, 0.3, 0.3))))
+        new Sphere(Vector3(0, 0, -1), 0.5f, new Metal(
+                new ConstantTexture(Vector3(0.8, 0.8, 0.8))
+            )
+        ),
+        new Sphere(Vector3(0, -100.5, -1), 100.0f, new Lambertian(
+            new CheckerTexture(
+                new ConstantTexture(Vector3(0.8, 0.8, 0.8)),
+                new ConstantTexture(Vector3(0.1, 0.3, 0.3))
+            )
+        ))
     });
 
     uint numSamples = 100;
