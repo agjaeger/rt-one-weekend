@@ -35,6 +35,10 @@ namespace rtow {
         Vector3 operator*(Vector3 lhs, float rhs);
         Vector3 operator*(float lhs, Vector3 rhs);
 
+
+        Vector3 reflect (Vector3 v1, Vector3 v2);
+        bool refract (Vector3 v, Vector3 n, float ni_over_nt, Vector3 &refracted);
+        
         float length(Vector3 v);
         float squaredLength(Vector3 v);
 

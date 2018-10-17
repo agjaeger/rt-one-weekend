@@ -138,6 +138,34 @@ rtow::math::operator* (
     );
 }
 
+Vector3
+rtow::math::reflect (
+    Vector3 p_vec1,
+    Vector3 p_vec2
+) {
+    return p_vec1 - 2 * dot(p_vec1, p_vec2) * p_vec2;
+}
+
+bool
+rtow::math::refract (
+    Vector3 p_vecIn,
+    Vector3 p_normal,
+    float p_refractiveRatio,
+    Vector3 &p_refractOut
+) {
+    Vector3 uv = unitVector(p_vecIn);
+    
+    float dt = dot(uv, p_normal);
+    float discriminant = 1.0f - pow(p_refractiveRatio,2) * (1 - pow(dt,2));
+    
+    if (discriminant > 0) {
+        p_refractOut = p_refractiveRatio * (uv - p_normal * dt) - p_normal * sqrt(discriminant);
+        return true;
+    }
+    
+    return false;
+}
+
 float
 rtow::math::length (
     Vector3 p_vec

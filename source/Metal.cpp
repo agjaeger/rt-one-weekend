@@ -27,11 +27,3 @@ Metal::scatter (
     
     return (dot(p_scatterOut.direction(), p_record.normal) > 0);
 }
-
-Vector3
-Metal::reflect (
-    Vector3 p_vec1,
-    Vector3 p_vec2
-) {
-    return p_vec1 - 2 * dot(p_vec1, p_vec2) * p_vec2;
-}

@@ -3,24 +3,29 @@
 #include <memory>
 #include <cstdlib>
 
-#include "Camera.h"
+// Math
 #include "Vector3.h"
 #include "Ray.h"
-#include "Image.h"
 
-#include "Sphere.h"
-#include "IntersectableList.h"
+// Render
+#include "Camera.h"
+#include "Image.h"
 
 #include "Material.h"
 #include "Lambertian.h"
 #include "Metal.h"
+#include "Dielectric.h"
 
 #include "Texture.h"
 #include "ConstantTexture.h"
 #include "CheckerTexture.h"
 
-using namespace rtow::render;
+// Scene
+#include "Sphere.h"
+#include "IntersectableList.h"
+
 using namespace rtow::math;
+using namespace rtow::render;
 using namespace rtow::scene;
 
 Vector3
@@ -36,7 +41,6 @@ getColor (
         Ray scatterRay;
         Vector3 attenuation;
 
-        // segfaults without if???
         bool scatterRayHit = intersectionRecord.material->scatter(
             p_r, 
             intersectionRecord,
@@ -74,10 +78,7 @@ int main() {
                 new ConstantTexture(Vector3(0.8, 0.6, 0.2))
             )
         ),
-        new Sphere(Vector3(-1, 0, -1), 0.5f, new Metal(
-                new ConstantTexture(Vector3(0.8, 0.8, 0.8))
-            )
-        ),
+        new Sphere(Vector3(-1, 0, -1), 0.5f, new Dielectric(1.5)),
         
     });
 
