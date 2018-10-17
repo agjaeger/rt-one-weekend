@@ -79,6 +79,7 @@ int main() {
             )
         ),
         new Sphere(Vector3(-1, 0, -1), 0.5f, new Dielectric(1.5)),
+        new Sphere(Vector3(-1, 0, -1), -0.45f, new Dielectric(1.5)),
         
     });
 
