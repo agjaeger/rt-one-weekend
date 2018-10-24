@@ -1,7 +1,9 @@
 
 #include <iostream>
+#include <chrono>
 
-#include "zupply.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 #include "Random.h"
 
@@ -49,11 +51,17 @@ getColor (
 }
 
 int main() {
+    spdlog::set_level(spdlog::level::trace);
+    spdlog::periodic_flush(std::chrono::seconds(10));
+    auto infoLogger = spdlog::basic_logger_mt("rt-info", "output.log", true);
+    auto perfLogger = spdlog::basic_logger_mt("rt-perf", "perf.log", true);
+    
     std::string desc;
     Intersectable *world = randomSpheres(desc);
     
     std::cout << "Scene: " << desc << std::endl;
-     
+    infoLogger->trace("yo");
+
     uint numSamples = 2;
     Image output (2, 1);
     
@@ -80,6 +88,9 @@ int main() {
             pixelColor = pixelColor / float(numSamples);
             output.setPixel(x, y, pixelColor);
         }
+        
+        // write output after every scanline
+        output.write("render.png");
     }
 
     output.write("render.png");
