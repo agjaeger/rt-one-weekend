@@ -23,7 +23,8 @@ Vector3
 getColor (
     Ray p_r,
     Intersectable *p_world,
-    int p_depth=0
+    int p_depth=0,
+    int p_maxDepth=10
 ) {
     Intersection intersectionRecord;
     bool primaryRayHit = p_world->intersect(p_r, 0.001f, 100.0f, intersectionRecord);
@@ -38,8 +39,8 @@ getColor (
             scatterRay
         );
 
-        if (scatterRayHit && p_depth < 10) {
-            return attenuation * getColor(scatterRay, p_world, p_depth+1);
+        if (scatterRayHit && p_depth < p_maxDepth) {
+            return attenuation * getColor(scatterRay, p_world, p_depth+1, p_maxDepth);
         } else {
             return Vector3(0,0,0);
         }
@@ -52,25 +53,46 @@ getColor (
 
 int main() {
     spdlog::set_level(spdlog::level::trace);
-    spdlog::periodic_flush(std::chrono::seconds(10));
+    spdlog::flush_every(std::chrono::seconds(10));
     auto infoLogger = spdlog::basic_logger_mt("rt-info", "output.log", true);
     auto perfLogger = spdlog::basic_logger_mt("rt-perf", "perf.log", true);
     
     std::string desc;
-    Intersectable *world = randomSpheres(desc);
+    Intersectable *world = randomSpheres(desc);    
     
-    std::cout << "Scene: " << desc << std::endl;
-    infoLogger->trace("yo");
+    int outputWidth = 200;
+    int outputHeight = 200;
+    int numSamples = 19;
+    int maxRecursionDepth = 10;
+    
+    Vector3 cameraFrom (3, 1, 2);
+    Vector3 cameraTo (0,0,-1);
+    int fov = 60;
+    float aperature = 2.0;
+    float focusPlane = (cameraFrom - cameraTo).length();
+    
+    Image output (outputWidth, outputHeight);    
 
-    uint numSamples = 2;
-    Image output (2, 1);
+    infoLogger->info("Scene: {}", desc);
+    infoLogger->trace("Image Size {} x {}", outputWidth, outputHeight);
+    infoLogger->trace("Number of Samples {}", numSamples);
+    infoLogger->trace("Max Recursion Depth {}", maxRecursionDepth);
+    infoLogger->trace("Camera Position {}", cameraFrom.toString());
+    infoLogger->trace("Camera Looking at {}", cameraTo.toString());
+    infoLogger->trace("Camera FOV {}", fov);
+
+    perfLogger->info("Image Size {} x {}", outputWidth, outputHeight);
+    perfLogger->info("Number of Samples {}", numSamples);
+    perfLogger->info("Max Recursion Depth {}", maxRecursionDepth);
     
     Camera camera (
-        Vector3(3,1,2),
-        Vector3(0,0,-1),
+        cameraFrom,
+        cameraTo,
         Vector3(0,1,0),
-        60,
-        float(output.width()) / float(output.height())
+        fov,
+        float(output.width()) / float(output.height()),
+        aperature,
+        focusPlane
     );
     
     for (int y = 0; y < output.height(); ++y) {

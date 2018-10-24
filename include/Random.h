@@ -11,6 +11,16 @@ namespace rtow {
                 static float getFloat() {
                     return rand() / float(RAND_MAX);
                 }
+                
+                static Vector3 unitDisk() {
+                    Vector3 p;
+                    
+                    do {
+                        p = 2.0 * Vector3(Random::getFloat(), Random::getFloat(), 0.0f) - Vector3(1, 1, 0)
+                    } while (dot(p,p) >= 1.0);
+                    
+                    return p;
+                }
             
                 static Vector3 unitSphere() {
                     Vector3 p;

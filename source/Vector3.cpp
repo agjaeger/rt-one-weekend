@@ -56,6 +56,20 @@ Vector3::operator[] (
     return data[p_index];
 }
 
+std::string
+Vector3::toString () {
+    std::ostringstream ss;
+    
+    ss << "X:" << " ";
+    ss << data[0];
+    ss << " " << "Y:";
+    ss << data[1];
+    ss << " " << "Z:";
+    ss << data[2];
+    
+    return ss.str();
+}
+
 // Namespace function implementations
 
 std::ostream&
@@ -63,7 +77,7 @@ rtow::math::operator<< (
     std::ostream& p_os,
     Vector3 p_vec
 ) {
-    return p_os << " X:" << p_vec.x() << " Y:" << p_vec.y() << " Z:" << p_vec.z();
+    return p_os << p_vec.toString();
 }
 
 Vector3
