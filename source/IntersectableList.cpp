@@ -3,9 +3,18 @@
 
 using namespace rtow::scene;
 
+IntersectableList::IntersectableList() {}
+
 IntersectableList::IntersectableList (
     std::initializer_list<Intersectable*> p_objs
 ) : m_objs (p_objs) {}
+
+void 
+IntersectableList::append (
+    Intersectable *p_obj
+) {
+    m_objs.push_back(p_obj);
+}
 
 bool
 IntersectableList::intersect (

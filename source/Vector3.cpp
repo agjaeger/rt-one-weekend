@@ -208,7 +208,7 @@ rtow::math::cross (
 ) {
     return Vector3 (
         p_vec1.y() * p_vec2.z() - p_vec1.z() * p_vec2.y(),
-        -(p_vec1.z() * p_vec2.x() - p_vec1.x() * p_vec2.z()),
+        p_vec1.z() * p_vec2.x() - p_vec1.x() * p_vec2.z(),
         p_vec1.x() * p_vec2.y() - p_vec1.y() * p_vec2.x()
     );
 }

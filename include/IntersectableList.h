@@ -11,7 +11,10 @@ namespace rtow {
     namespace scene {
         class IntersectableList : public Intersectable {
             public:
+                IntersectableList();
                 IntersectableList(std::initializer_list<Intersectable*> objs);
+                
+                void append(Intersectable* object);
                 virtual bool intersect(Ray r, float t_min, float t_max, Intersection &intersection);
 
             private:

@@ -8,6 +8,7 @@ namespace rtow {
     namespace render {
         class Camera {
             public:
+                Camera (Vector3 lookfrom, Vector3 lookat, Vector3 vup, float vfov, float aspect);
                 Ray getRay (float u, float v);
 
             private:

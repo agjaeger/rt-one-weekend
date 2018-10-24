@@ -1,6 +1,10 @@
 
 #include <iostream>
 
+#include "zupply.h"
+
+#include "Random.h"
+
 // Render
 #include "Camera.h"
 #include "Image.h"
@@ -38,7 +42,7 @@ getColor (
             return Vector3(0,0,0);
         }
     }
-
+    
     Vector3 uv_direction = unitVector(p_r.direction());
     float t = 0.5f * (uv_direction.y() + 1);
     return (1.0f-t) * Vector3(1, 1, 1) + t * Vector3(0.5f, 0.7f, 1.0f);
@@ -46,31 +50,40 @@ getColor (
 
 int main() {
     std::string desc;
-    Intersectable *world = bubble(desc);
-
-    uint numSamples = 100;
-    Image output (200, 100);
-    Camera camera;
+    Intersectable *world = randomSpheres(desc);
+    
+    std::cout << "Scene: " << desc << std::endl;
+     
+    uint numSamples = 2;
+    Image output (2, 1);
+    
+    Camera camera (
+        Vector3(3,1,2),
+        Vector3(0,0,-1),
+        Vector3(0,1,0),
+        60,
+        float(output.width()) / float(output.height())
+    );
     
     for (int y = 0; y < output.height(); ++y) {
         for (int x = 0; x < output.width(); ++x) {
-            Vector3 pixelColor = Vector3(0,0,0);
+            Vector3 pixelColor = Vector3(0, 0, 0);
             
             for (int sample = 0; sample < numSamples; sample++) {
-                float ss_u = (x + (rand()/float(RAND_MAX))) / output.width();
-                float ss_v = (y + (rand()/float(RAND_MAX))) / output.height();
+                float ss_u = (x + Random::getFloat()) / output.width();
+                float ss_v = (y + Random::getFloat()) / output.height();
 
-                Ray r = camera.getRay(ss_u, ss_v);
-                pixelColor = pixelColor + getColor(r, world);
+                Ray cameraRay = camera.getRay(ss_u, ss_v);
+                pixelColor = pixelColor + getColor(cameraRay, world);
             }
 
             pixelColor = pixelColor / float(numSamples);
             output.setPixel(x, y, pixelColor);
         }
     }
-    
+
     output.write("render.png");
-  
+
     free(world);
     return 0;
 }
