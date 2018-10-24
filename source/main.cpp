@@ -69,7 +69,7 @@ int main() {
     Vector3 cameraTo (0,0,-1);
     int fov = 60;
     float aperature = 2.0;
-    float focusPlane = (cameraFrom - cameraTo).length();
+    float focusPlane = 2;
     
     Image output (outputWidth, outputHeight);    
 

@@ -33,7 +33,7 @@ Camera::getRay (
     float p_ssV     // screen space v coord
 ) {
     Vector3 radDir = m_lensRadius * Random::unitDisk();
-    Vector3 offset = p_ssU * radDir.x() + p_ssV * radDir.y();
+    float offset = p_ssU * radDir.x() + p_ssV * radDir.y();
     
     return Ray (
         m_origin + offset, 

@@ -16,7 +16,7 @@ namespace rtow {
                     Vector3 p;
                     
                     do {
-                        p = 2.0 * Vector3(Random::getFloat(), Random::getFloat(), 0.0f) - Vector3(1, 1, 0)
+                        p = 2.0 * Vector3(Random::getFloat(), Random::getFloat(), 0.0f) - Vector3(1, 1, 0);
                     } while (dot(p,p) >= 1.0);
                     
                     return p;

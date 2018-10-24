@@ -3,6 +3,7 @@
 
 #include "Vector3.h"
 #include "Ray.h"
+#include "Random.h"
 
 namespace rtow {
     namespace render {

@@ -93,6 +93,30 @@ rtow::math::operator+ (
 }
 
 Vector3
+rtow::math::operator+ (
+    Vector3 p_lhs,
+    float p_rhs
+) {
+    return Vector3 (
+        p_lhs.x() + p_rhs,
+        p_lhs.y() + p_rhs,
+        p_lhs.z() + p_rhs
+    );
+}
+
+Vector3
+rtow::math::operator- (
+    Vector3 p_lhs,
+    float p_rhs
+) {
+    return Vector3 (
+        p_lhs.x() - p_rhs,
+        p_lhs.y() - p_rhs,
+        p_lhs.z() - p_rhs
+    );
+}
+
+Vector3
 rtow::math::operator- (
     Vector3 p_lhs,
     Vector3 p_rhs

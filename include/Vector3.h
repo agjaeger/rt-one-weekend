@@ -32,7 +32,9 @@ namespace rtow {
         std::ostream& operator<<(std::ostream &os, Vector3 v);
         
         Vector3 operator+(Vector3 lhs, Vector3 rhs);
+        Vector3 operator+(Vector3 lhs, float rhs);
         Vector3 operator-(Vector3 lhs, Vector3 rhs);
+        Vector3 operator-(Vector3 lhs, float rhs);
         Vector3 operator/(Vector3 lhs, float rhs);
         Vector3 operator*(Vector3 lhs, Vector3 rhs);
         Vector3 operator*(Vector3 lhs, float rhs);
