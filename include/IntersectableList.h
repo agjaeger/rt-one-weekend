@@ -16,7 +16,8 @@ namespace rtow {
                 
                 void append(Intersectable* object);
                 virtual bool intersect(Ray r, float t_min, float t_max, Intersection &intersection);
-
+                virtual bool boundingBox(AABB& box);
+                
             private:
                 std::vector<Intersectable*> m_objs;
         };

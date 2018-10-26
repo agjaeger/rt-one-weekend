@@ -40,3 +40,31 @@ IntersectableList::intersect (
     
     return intersectedAny;
 }
+
+bool
+IntersectableList::boundingBox (
+    AABB& p_bbox
+) {
+    if (m_objs.size() < 1) {
+        return false;
+    }
+
+    AABB tempBox;
+    bool isFirstObjTrue = m_objs[0]->boundingBox(tempBox);
+    
+    if (!isFirstObjTrue) {
+        return false;
+    } else {
+        p_bbox = tempBox;
+    }
+    
+    for (int i = 1; i < m_objs.size(); i++) {
+        if (m_objs[i]->boundingBox(tempBox)) {
+            p_bbox = surroundingBox(p_bbox, tempBox);
+        } else {
+            return false;
+        }
+    }
+    
+    return true;    
+}

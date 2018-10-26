@@ -49,6 +49,18 @@ Sphere::intersect (
     return false;
 }
 
+bool
+Sphere::boundingBox (
+    AABB& p_box
+) {
+    p_box = AABB(
+        m_origin - Vector3(m_radius, m_radius, m_radius),
+        m_origin + Vector3(m_radius, m_radius, m_radius)
+    );
+    
+    return true;
+}
+
 void
 Sphere::fillIntersection (
     float p_dist,

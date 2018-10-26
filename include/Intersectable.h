@@ -3,6 +3,7 @@
 
 #include "Vector3.h"
 #include "Ray.h"
+#include "AABB.h"
 
 // Forward Declaration
 namespace rtow {
@@ -26,6 +27,7 @@ namespace rtow {
         class Intersectable {
             public:
                 virtual bool intersect(Ray r, float t_min, float t_max, Intersection &intersection) = 0;
+                virtual bool boundingBox(AABB& bbox) = 0;
         };
     };
 };

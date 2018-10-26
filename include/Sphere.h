@@ -13,6 +13,7 @@ namespace rtow {
                 ~Sphere ();
 
                 virtual bool intersect (Ray r, float t_min, float t_max, Intersection &intersection);     
+                virtual bool boundingBox (AABB &bbox);
 
             private:
                 Vector3 m_origin;
