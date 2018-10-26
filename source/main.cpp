@@ -60,15 +60,15 @@ int main() {
     std::string desc;
     Intersectable *world = randomSpheres(desc);    
     
-    int outputWidth = 200;
-    int outputHeight = 200;
-    int numSamples = 19;
+    int outputWidth = 800;
+    int outputHeight = 400;
+    int numSamples = 400;
     int maxRecursionDepth = 10;
     
-    Vector3 cameraFrom (3, 1, 2);
-    Vector3 cameraTo (0,0,-1);
-    int fov = 60;
-    float aperature = 2.0;
+    Vector3 cameraFrom (13, 2, 3);
+    Vector3 cameraTo (0,0,0);
+    int fov = 20;
+    float aperature = 0.0;
     float focusPlane = 2;
     
     Image output (outputWidth, outputHeight);    

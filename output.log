@@ -1,7 +1,7 @@
-[2018-10-24 10:16:37.621] [rt-info] [info] Scene: A bunch of random spheres (cover image of book 1)
-[2018-10-24 10:16:37.621] [rt-info] [trace] Image Size 200 x 200
-[2018-10-24 10:16:37.621] [rt-info] [trace] Number of Samples 19
-[2018-10-24 10:16:37.621] [rt-info] [trace] Max Recursion Depth 10
-[2018-10-24 10:16:37.621] [rt-info] [trace] Camera Position X: 3 Y:1 Z:2
-[2018-10-24 10:16:37.621] [rt-info] [trace] Camera Looking at X: 0 Y:0 Z:-1
-[2018-10-24 10:16:37.621] [rt-info] [trace] Camera FOV 60
+[2018-10-24 10:49:20.368] [rt-info] [info] Scene: A bunch of random spheres (cover image of book 1)
+[2018-10-24 10:49:20.369] [rt-info] [trace] Image Size 800 x 400
+[2018-10-24 10:49:20.369] [rt-info] [trace] Number of Samples 400
+[2018-10-24 10:49:20.369] [rt-info] [trace] Max Recursion Depth 10
+[2018-10-24 10:49:20.369] [rt-info] [trace] Camera Position X: 13 Y:2 Z:3
+[2018-10-24 10:49:20.369] [rt-info] [trace] Camera Looking at X: 0 Y:0 Z:0
+[2018-10-24 10:49:20.369] [rt-info] [trace] Camera FOV 20

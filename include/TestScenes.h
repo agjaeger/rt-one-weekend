@@ -113,7 +113,7 @@ namespace rtow {
             }
             
             sceneList->append(new Sphere(Vector3(0, 1, 0), 1, new Dielectric(1.5f)));
-            sceneList->append(new Sphere(Vector3(1.8, 1, -1), 1, new Metal(new ConstantTexture(Vector3(0.4, 0.2, 0.1f)))));
+            sceneList->append(new Sphere(Vector3(4, 1, 0), 1, new Metal(new ConstantTexture(Vector3(0.4, 0.2, 0.1f)))));
             sceneList->append(new Sphere(Vector3(-4, 1, 0), 1, new Lambertian(new ConstantTexture(Vector3(0.7, 0.6, 0.5f)))));
             
             return sceneList;
