@@ -60,9 +60,9 @@ int main() {
     std::string desc;
     Intersectable *world = randomSpheres(desc);    
     
-    int outputWidth = 800;
-    int outputHeight = 400;
-    int numSamples = 400;
+    int outputWidth = 200;
+    int outputHeight = 200;
+    int numSamples = 20;
     int maxRecursionDepth = 10;
     
     Vector3 cameraFrom (13, 2, 3);
